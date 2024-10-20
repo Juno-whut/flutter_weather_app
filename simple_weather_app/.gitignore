@@ -43,4 +43,4 @@ app.*.map.json
 /android/app/release
 
 # temporalily getting rid of homepage.dart so i dont have to manunaly include all other files i want to update
-simple_weather_app/lib/pages/homepage.dart
+/lib/pages/homepage.dart
