@@ -6,7 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 
 class WeatherService {
-  static const BASE_URL = 'https://openweathermap.org/';
+  static const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
   final String apiKey;
 
   WeatherService(this.apiKey);
@@ -31,8 +31,8 @@ class WeatherService {
 
     // fetch the current location
     Position position = await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.high);
-
+        desiredAccuracy: LocationAccuracy.high
+    ); // desiredAccuarcy depreciated but getCurrentPosition defaults to 'best' accuracy
     // convert location in a list of placement mark objects
     List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
 
