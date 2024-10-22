@@ -45,7 +45,7 @@ class _WeatherPageState extends State<WeatherPage> {
         case 'haze':
         case 'smoke':
         case 'dust':
-          return 'assets/snowing.json';
+          return 'assets/windy.json';
         case 'rain':
         case 'drizzle':
         case 'shower rain':
@@ -120,19 +120,102 @@ class _WeatherPageState extends State<WeatherPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children:[
           // city name
-          Text(_weather?.cityName ?? 'loading city..'),
+          Text(_weather?.cityName ?? 'loading city..',
+          style: const TextStyle(
+            color: Colors.black,
+            fontSize: 40,
+            fontWeight: FontWeight.w600,
+            )
+          ),
+          
 
           // animation
           Lottie.asset(getWeatherAnimation(_weather?.mainCondition)),
 
           // temperature
-          Text('${_weather?.temperature.round()}*C'),
+          Text('${_weather?.temperature.round()}F',
+          style: const TextStyle(
+            color: Colors.black,
+            fontSize: 40,
+            fontWeight: FontWeight.w500,
+          )
+        ),
+          
 
           // main description
-          Text(_weather?.mainCondition ?? ""),
+          Text(_weather?.mainCondition ?? "",
+          style: const TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.w400,
+            )
+          ),
+
+          // extra space
+          SizedBox(
+            height: MediaQuery.sizeOf(context).height * 0.05,
+          ),
+          // other weather stats
+          _extraInfo(),
+          ],
+        ),  
+      ), 
+    );
+  }
+
+  Widget _extraInfo() {
+    return Container(
+      width: MediaQuery.sizeOf(context).width * 0.8,
+      height: MediaQuery.sizeOf(context).height * 0.15,
+      decoration: BoxDecoration
+      (color: Colors.lightBlueAccent, 
+      borderRadius: BorderRadius.circular(15),
+      ),
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text("High: ${_weather?.high.round()}°F",
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                ),
+              ),
+              Text("Low: ${_weather?.low.round()}°F",
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize:15,
+              ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text("Wind: ${(_weather?.windSpeed != null ? _weather!.windSpeed * 2.23694 : 0).toStringAsFixed(0)} mph",
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                ),
+              ),
+              Text("Humidity: ${_weather?.humidity.round()}%",
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize:15,
+              ),
+              ),
+            ],
+          ),
         ],
-        ), 
-      )
+      ),
     );
   }
 }

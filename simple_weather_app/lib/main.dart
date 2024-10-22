@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+// 2 different style weather apps that both do the same job but with different approachs and different designs
+// After building both i like weather_page.dart more than homepage.dart
 import 'package:simple_weather_app/pages/weather_page.dart';
 // import 'package:simple_weather_app/pages/homepage.dart';
 
